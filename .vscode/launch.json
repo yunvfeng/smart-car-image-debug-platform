@@ -1,0 +1,23 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "VisionLab original C replay",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/pc/visionlab_replay.exe",
+      "args": ["build/debug/frames.bin", "build/debug/results.jsonl"],
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb.exe",
+      "stopAtEntry": false,
+      "externalConsole": false,
+      "preLaunchTask": "VisionLab prepare debug",
+      "setupCommands": [
+        {"text": "source build/gdb-paths.gdb"},
+        {"text": "-enable-pretty-printing"},
+        {"text": "set print elements 188"}
+      ]
+    }
+  ]
+}

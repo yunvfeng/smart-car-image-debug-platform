@@ -1,0 +1,6 @@
+/smart-car/
+/build/
+/datasets/
+/runs/
+__pycache__/
+*.pyc

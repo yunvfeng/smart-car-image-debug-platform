@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "VisionLab build",
+      "type": "process",
+      "command": "powershell",
+      "args": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "${workspaceFolder}/scripts/build.ps1", "-ImageSource", "${input:sourceFile}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": ["$gcc"],
+      "group": {"kind": "build", "isDefault": true}
+    },
+    {
+      "label": "VisionLab prepare debug",
+      "type": "process",
+      "command": "python",
+      "args": ["scripts/prepare_debug.py", "${input:dataset}", "${input:through}", "--mode", "${input:mode}"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "dependsOn": "VisionLab build",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {"id": "sourceFile", "type": "promptString", "description": "Selected algorithm entry C file", "default": "smart-car/project/code/image.c"},
+    {"id": "dataset", "type": "promptString", "description": "Dataset directory", "default": "datasets/demo"},
+    {"id": "through", "type": "promptString", "description": "Last zero-based index to execute", "default": "527"},
+    {"id": "mode", "type": "pickString", "description": "Replay mode", "options": ["strict", "exploratory"], "default": "strict"}
+  ]
+}
