@@ -2,5 +2,6 @@
 /build/
 /datasets/
 /runs/
+/dist/
 __pycache__/
 *.pyc

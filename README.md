@@ -7,7 +7,11 @@
 | 实车工作台 | WiFi / TCP 服务端、串口接入、图像与遥测显示、在线调参、无损录制和数据导出 |
 | 图像实验室 | 选择外部 C 源码、自动编译回放、原图与结果对照、播放调速、异常标记、区间选帧和 AI 调试包导出 |
 
-## 快速开始
+## 下载使用
+
+在 [Releases](https://github.com/yunvfeng/smart-car-image-debug-platform/releases) 下载 Windows 64 位便携包，完整解压到可写目录，双击 `VisionLab.exe` 启动。运行环境、默认视觉源码和 C 编译工具已随包提供。首次回放会自动编译算法。
+
+## 从源码运行
 
 ### 1. 准备环境
 

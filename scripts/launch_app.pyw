@@ -8,6 +8,10 @@ import traceback
 root = Path(__file__).resolve().parents[1]
 os.chdir(root)
 sys.path.insert(0, str(root))
+runtime = root / "runtime"
+if runtime.is_dir():
+    tools = [runtime, root / "tools/mingw64/bin", root / "tools/cmake/bin"]
+    os.environ["PATH"] = os.pathsep.join([*(str(path) for path in tools), os.environ.get("PATH", "")])
 try:
     from visionlab.app import main
     main()

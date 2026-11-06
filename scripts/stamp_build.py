@@ -25,8 +25,12 @@ if args.capture:
     raise SystemExit(0)
 if json.loads(args.expected.read_text(encoding="utf-8")) != record:
     raise SystemExit("Sources changed during compilation. Save files and rebuild.")
+firmware = ROOT / "smart-car"
+if (firmware / ".git").exists():
+    revision = subprocess.check_output(["git", "-C", str(firmware), "rev-parse", "HEAD"], text=True).strip()
+else:
+    revision = (firmware / "REVISION").read_text(encoding="utf-8").strip()
 record.update(executable_sha256=sha256(args.executable),
-              firmware_commit=subprocess.check_output(
-                  ["git", "-C", str(ROOT / "smart-car"), "rev-parse", "HEAD"], text=True).strip(),
+              firmware_commit=revision,
               compiler=subprocess.check_output(["gcc", "--version"], text=True).splitlines()[0])
 args.executable.with_suffix(".build.json").write_text(json.dumps(record, indent=2), encoding="utf-8")
